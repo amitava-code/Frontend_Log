@@ -18,18 +18,15 @@ body{
     height: 400px;
     width: 400px;
     background-color: crimson;
+    margin: 100px;
+  
 }
 
-#inner{
 
-    height: 200px;
-    width: 200px;
-    background-color: snow;
-    
 
-}
-
-#a{
-    color: red;
-    background-color: black;
+#box2{
+    height: 400px;
+    width: 400px;
+    background-color: royalblue;
+    margin: 50px 30px;
 }
