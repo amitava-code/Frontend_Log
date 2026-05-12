@@ -2,6 +2,11 @@
     font-family: hihi;
     src: url(./Storm\ Gust.otf);
 }
+
+@font-face {
+    font-family: nothing;
+    src: url(./Ndot-55.otf);
+}
 *{
     margin: 0;
     padding: 0;
@@ -22,7 +27,7 @@ h1{
     color: rgb(134, 22, 14);
     background-color: rgb(13, 14, 14);
     font-size: 40px;
-    font-family:hihi;
+    font-family:nothing;
     font-weight: 200;
     font-style:italic;
     text-align: center;
