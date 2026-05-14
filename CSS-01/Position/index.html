@@ -6,9 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="box1">1</div>
-    <div id="box2">2</div>
-    <div id="box3">3</div>
+
+    <div id="parent">
+        <div id="child"></div>
+    </div>
+   
     
     <style>
        *{
@@ -28,30 +30,27 @@ body{
 }
 
 
-#box1{
-    height: 200px;
-    width: 200px;
+#parent{
+    height: 400px;
+    width: 400px;
     background-color: crimson;
+    position: relative;
+
+}
+
+
+#child{
+    height: 50%;
+    width: 50%;
+    background-color: royalblue;
     position:absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50% , -50%);
+    transform: translate(-50%,-50%);
+   
 }
 
 
-#box2{
-    height: 200px;
-    width: 200px;
-    background-color: royalblue;
-    position: absolute;
-    left: 30%;
-}
-
-#box3{
-    height: 200px;
-    width: 200px;
-    background-color: rgb(65, 225, 78);
-}
 
 
 
