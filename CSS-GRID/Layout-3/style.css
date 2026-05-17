@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    color: rgb(244, 243, 243);
+}
+
+
+html,body{
+    height: 100%;
+    width: 100%;
+}
+
+main{
+    height: 100%;
+    width: 100%;
+    background-color: rgb(42, 40, 40);
+    display: grid;
+    grid-template-columns: 20% 20% 60% ;
+    grid-template-rows: 40% 40% 90%;
+}
+
+.box{
+ 
+    background-color: crimson;
+    border: 3px solid white;
+}
