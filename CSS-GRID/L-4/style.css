@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    color: rgb(244, 243, 243);
+}
+
+
+html,body{
+    height: 100%;
+    width: 100%;
+}
+
+main{
+    height: 100%;
+    width: 100%;
+    display: grid;
+
+}
+
+header{
+    background-color: aqua;
+}
+
+section{
+    background-color: aquamarine;
+}
+
+footer{
+    background-color: cadetblue;
+}
