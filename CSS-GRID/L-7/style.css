@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    color: rgb(244, 243, 243);
+}
+
+
+html,body{
+    height: 100%;
+    width: 100%;
+}
+
+
+main{
+    height: 100%;
+    width: 100%;
+    background-color: rgb(33, 32, 31);
+    display: grid;
+    gap: 5px;
+
+    grid-template-rows: 1fr 1fr ;
+    grid-template-columns: 50% 25% 25%;
+
+    grid-template-areas: 
+    "left top-right top-right"
+    "left left-right right-right";
+}
+
+
+.left{
+    background-color: darkviolet;
+    grid-area: left;
+}
+
+.top-right{
+    background-color: aquamarine;
+    grid-area: top-right;
+}
+
+.left-right{
+    background-color: chocolate;
+    grid-area: left-right;
+}
+
+.right-right{
+
+    background-color: cornflowerblue;
+    grid-area: right-right;
+}
