@@ -13,12 +13,13 @@ html,body{
 main{
     height: 100%;
     width: 100%;
-    background-color: lightblue;
+    background-color:#FBFBFB;
 }
 
 #section1{
     height: 100%;
     width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 nav{
@@ -37,4 +38,33 @@ nav .header{
 
 .header i{
     font-size: 30px;
+}
+
+.links {
+    display: flex;
+    gap: 10px;
+}
+
+.links a{
+    text-decoration: none; 
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+
+}
+
+.btn{
+    display: flex;
+    gap: 5px;
+}
+
+.btn button{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+}
+
+.btn button:nth-child(2){
+    background-color: black;
+    color: white;
 }
