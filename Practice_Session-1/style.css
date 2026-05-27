@@ -83,7 +83,7 @@ nav .header{
 
 .hero .left{
     height: 100%;
-    width: 50%;
+    width: 45%;
     background-color: crimson;
     padding: 10px 20px;
 }
@@ -92,7 +92,7 @@ nav .header{
 .hero .right{
     height: 100%;
 
-    width: 50%;
+    width: 55%;
     background-color: rgb(243, 57, 113);
 }
 
@@ -118,4 +118,17 @@ nav .header{
 
 .rating-text span{
     font-size: 12px;
+}
+
+
+.left h1{
+    font-size: 80px;
+    margin-top: 50px;
+    line-height: 70px;
+}
+
+.left p{
+    font-size: 18px;
+    margin-top: 20px;
+    opacity: 0.62;
 }
