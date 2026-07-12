@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian — The Caliber 04 Automatic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0D0F;
+    --panel: #14171A;
+    --panel-line: #24282c;
+    --brass: #C9A227;
+    --brass-dim: #8a7530;
+    --cream: #E8E2D4;
+    --muted: #8b8f95;
+    --bronze: #3D2B1F;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--brass);color:#0B0D0F;}
+
+  a{color:inherit;text-decoration:none;}
+
+  .noise{
+    position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* NAV */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:28px 5vw;
+    mix-blend-mode:normal;
+  }
+  .wordmark{
+    font-family:'Fraunces',serif;font-weight:500;font-size:1.15rem;
+    letter-spacing:0.04em;
+  }
+  .wordmark span{color:var(--brass);}
+  nav ul{display:flex;gap:2.4rem;list-style:none;}
+  nav a{
+    font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+    transition:color .3s ease;
+  }
+  nav a:hover, nav a:focus-visible{color:var(--cream);}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items:center;
+    padding: 0 5vw;
+  }
+  #hero-canvas{
+    position:absolute;
+    top:0; right:0;
+    width:56vw; height:100vh;
+    z-index:0;
+  }
+  .hero-copy{
+    position:relative;z-index:2;
+    padding-top: 40px;
+    max-width: 620px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--brass);
+    display:flex;align-items:center;gap:.6rem;
+    margin-bottom:1.6rem;
+  }
+  .eyebrow::before{
+    content:"";width:22px;height:1px;background:var(--brass);display:inline-block;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(2.6rem, 5vw, 4.6rem);
+    line-height:1.02;
+    letter-spacing:-.01em;
+  }
+  h1 em{
+    font-style:italic;font-weight:300;color:var(--brass);
+  }
+  .hero-copy p.lede{
+    margin-top:1.6rem;
+    font-size:1.05rem;
+    line-height:1.65;
+    color:#c7c2b6;
+    max-width:480px;
+    font-weight:300;
+  }
+  .hero-cta{
+    margin-top:2.6rem;
+    display:flex;align-items:center;gap:1.6rem;
+  }
+  .btn{
+    font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:1rem 1.9rem;
+    border:1px solid var(--brass);
+    color:var(--bg);
+    background:var(--brass);
+    cursor:pointer;
+    transition:all .3s ease;
+    font-family:'Inter',sans-serif;font-weight:500;
+  }
+  .btn:hover{background:transparent;color:var(--brass);}
+  .btn-ghost{
+    font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);
+    border-bottom:1px solid var(--panel-line);
+    padding-bottom:2px;
+    transition:color .3s, border-color .3s;
+  }
+  .btn-ghost:hover{color:var(--cream);border-color:var(--cream);}
+
+  .scroll-cue{
+    position:absolute;bottom:38px;left:5vw;z-index:2;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;color:var(--muted);letter-spacing:.1em;
+    display:flex;align-items:center;gap:.7rem;
+  }
+  .scroll-cue .line{width:1px;height:34px;background:linear-gradient(var(--muted),transparent);animation:pulse 2.2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:.2}50%{opacity:1}}
+
+  /* SPEC STRIP */
+  .specs{
+    border-top:1px solid var(--panel-line);
+    border-bottom:1px solid var(--panel-line);
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+  }
+  .spec{
+    padding:2.6rem 2.2rem;
+    border-right:1px solid var(--panel-line);
+  }
+  .spec:last-child{border-right:none;}
+  .spec .label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);
+    margin-bottom:.9rem;
+  }
+  .spec .value{
+    font-family:'Fraunces',serif;font-weight:400;font-size:1.5rem;
+  }
+  .spec .sub{
+    margin-top:.5rem;font-size:.82rem;color:var(--muted);font-weight:300;
+  }
+
+  /* CRAFT SECTION */
+  .craft{
+    display:grid;grid-template-columns:1fr 1fr;gap:4vw;
+    padding: 9rem 5vw;
+    align-items:center;
+  }
+  .craft-visual{
+    position:relative;
+    aspect-ratio:1/1;
+    max-height:520px;
+  }
+  #gear-canvas{width:100%;height:100%;}
+  .craft-text .kicker{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass);margin-bottom:1.4rem;
+  }
+  .craft-text h2{
+    font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.8rem,3vw,2.6rem);
+    line-height:1.15;margin-bottom:1.6rem;
+    max-width:520px;
+  }
+  .craft-text p{
+    color:#c7c2b6;font-weight:300;line-height:1.75;max-width:460px;margin-bottom:1.2rem;
+  }
+  .craft-text .stat-row{
+    display:flex;gap:3rem;margin-top:2.2rem;
+  }
+  .craft-text .stat-row div .n{
+    font-family:'Fraunces',serif;font-size:1.9rem;color:var(--brass);
+  }
+  .craft-text .stat-row div .l{
+    font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:.3rem;
+  }
+
+  /* GALLERY / DIAL VARIANTS */
+  .variants{
+    padding: 6rem 5vw 9rem;
+    border-top:1px solid var(--panel-line);
+  }
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:3.2rem;
+    flex-wrap:wrap;gap:1rem;
+  }
+  .section-head .kicker{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass);margin-bottom:1rem;
+  }
+  .section-head h2{
+    font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.8rem,3vw,2.4rem);
+  }
+  .section-head p{color:var(--muted);max-width:340px;font-size:.9rem;font-weight:300;line-height:1.6;}
+
+  .variant-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--panel-line);
+    border:1px solid var(--panel-line);
+  }
+  .variant-card{
+    background:var(--bg);
+    padding:2.6rem 2rem 2rem;
+    text-align:center;
+    transition:background .4s ease;
+    cursor:pointer;
+  }
+  .variant-card:hover{background:var(--panel);}
+  .variant-dial{
+    width:120px;height:120px;border-radius:50%;
+    margin:0 auto 1.6rem;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    border:1px solid var(--panel-line);
+    transition:transform .5s ease;
+  }
+  .variant-card:hover .variant-dial{transform:rotate(8deg) scale(1.04);}
+  .variant-dial::after{
+    content:"";position:absolute;width:2px;height:38px;background:var(--brass);
+    top:22px;left:50%;transform-origin:bottom center;translate:-50% 0;
+  }
+  .variant-dial.onyx{background:radial-gradient(circle at 35% 30%, #24282c, #0c0d0f 70%);}
+  .variant-dial.verdigris{background:radial-gradient(circle at 35% 30%, #2c3a34, #10160f 70%);}
+  .variant-dial.ivory{background:radial-gradient(circle at 35% 30%, #d8d2c0, #b3ac97 70%);}
+  .variant-dial.ivory::after{background:#3D2B1F;}
+  .variant-card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.05rem;margin-bottom:.4rem;}
+  .variant-card .price{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);}
+
+  /* WAITLIST */
+  .waitlist{
+    padding:8rem 5vw;
+    border-top:1px solid var(--panel-line);
+    text-align:center;
+    position:relative;
+  }
+  .waitlist h2{
+    font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,4vw,3.2rem);
+    max-width:760px;margin:0 auto 1rem;line-height:1.1;
+  }
+  .waitlist h2 em{font-style:italic;color:var(--brass);font-weight:300;}
+  .waitlist p{color:var(--muted);max-width:460px;margin:0 auto 2.6rem;font-weight:300;}
+  form.join{
+    display:flex;justify-content:center;gap:0;max-width:440px;margin:0 auto;
+    border:1px solid var(--panel-line);
+  }
+  form.join input{
+    flex:1;background:transparent;border:none;outline:none;
+    padding:1rem 1.2rem;color:var(--cream);font-family:'Inter',sans-serif;font-size:.9rem;
+  }
+  form.join input::placeholder{color:var(--muted);}
+  form.join button{
+    border:none;background:var(--brass);color:var(--bg);padding:0 1.6rem;
+    font-family:'Inter',sans-serif;font-weight:500;font-size:.8rem;letter-spacing:.06em;
+    text-transform:uppercase;cursor:pointer;transition:background .3s;
+  }
+  form.join button:hover{background:var(--cream);}
+  .join-note{margin-top:1.2rem;font-size:.72rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;}
+
+  footer{
+    border-top:1px solid var(--panel-line);
+    padding:2.2rem 5vw;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:.72rem;color:var(--muted);
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  @media (max-width: 900px){
+    .hero{grid-template-columns:1fr;padding-top:120px;}
+    #hero-canvas{position:relative;width:100vw;height:50vh;right:auto;order:1;}
+    .hero-copy{order:2;padding-top:0;}
+    .specs{grid-template-columns:repeat(2,1fr);}
+    .spec:nth-child(2){border-right:none;}
+    .craft{grid-template-columns:1fr;padding:5rem 6vw;}
+    .variant-grid{grid-template-columns:1fr;}
+    nav ul{display:none;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+
+<header>
+  <div class="wordmark">MERIDIAN<span>.</span></div>
+  <nav>
+    <ul>
+      <li><a href="#specs">Movement</a></li>
+      <li><a href="#craft">Craft</a></li>
+      <li><a href="#variants">Editions</a></li>
+      <li><a href="#waitlist">Reserve</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-copy">
+    <div class="eyebrow">Caliber 04 — Limited Run of 200</div>
+    <h1>Time, <em>made</em><br>by hand.</h1>
+    <p class="lede">An in-house automatic movement, 68 hours of reserve, and a case machined from a single billet of 316L steel. No batteries. No compromises. Just the quiet mechanics of gears finding their moment.</p>
+    <div class="hero-cta">
+      <button class="btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Reserve Yours</button>
+      <a href="#craft" class="btn-ghost">See the movement ↓</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><div class="line"></div>DRAG TO ROTATE</div>
+</section>
+
+<section class="specs" id="specs">
+  <div class="spec">
+    <div class="label">Movement</div>
+    <div class="value">Cal. 04</div>
+    <div class="sub">In-house automatic, 26 jewels</div>
+  </div>
+  <div class="spec">
+    <div class="label">Power Reserve</div>
+    <div class="value">68 Hours</div>
+    <div class="sub">Twin barrel architecture</div>
+  </div>
+  <div class="spec">
+    <div class="label">Case</div>
+    <div class="value">Ø 39mm</div>
+    <div class="sub">316L steel, sapphire caseback</div>
+  </div>
+  <div class="spec">
+    <div class="label">Water Resistance</div>
+    <div class="value">100m</div>
+    <div class="sub">Screw-down crown, 10 ATM</div>
+  </div>
+</section>
+
+<section class="craft" id="craft">
+  <div class="craft-visual">
+    <canvas id="gear-canvas"></canvas>
+  </div>
+  <div class="craft-text">
+    <div class="kicker">The Movement</div>
+    <h2>Every gear is finished before it's assembled — not after.</h2>
+    <p>Our watchmakers hand-bevel each bridge under magnification, tracing the edge until it catches light the same way at every angle. It's slower. It's also the only way we know to make a movement worth winding every morning.</p>
+    <p>The Caliber 04 is regulated in six positions over fifteen days before it ever sees a case.</p>
+    <div class="stat-row">
+      <div><div class="n">6</div><div class="l">Regulation Positions</div></div>
+      <div><div class="n">15</div><div class="l">Days of Testing</div></div>
+      <div><div class="n">±2s</div><div class="l">Daily Accuracy</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="variants" id="variants">
+  <div class="section-head">
+    <div>
+      <div class="kicker">Editions</div>
+      <h2>Three dials, one caliber.</h2>
+    </div>
+    <p>Each edition ships in a numbered wooden case with its own regulation certificate.</p>
+  </div>
+  <div class="variant-grid">
+    <div class="variant-card">
+      <div class="variant-dial onyx"></div>
+      <h3>Onyx</h3>
+      <div class="price">$4,200 · 80 pieces</div>
+    </div>
+    <div class="variant-card">
+      <div class="variant-dial verdigris"></div>
+      <h3>Verdigris</h3>
+      <div class="price">$4,400 · 60 pieces</div>
+    </div>
+    <div class="variant-card">
+      <div class="variant-dial ivory"></div>
+      <h3>Ivory</h3>
+      <div class="price">$4,400 · 60 pieces</div>
+    </div>
+  </div>
+</section>
+
+<section class="waitlist" id="waitlist">
+  <h2>200 pieces. <em>No reissue.</em></h2>
+  <p>Join the reservation list to secure a fitting appointment before the run closes.</p>
+  <form class="join" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Reserved ✓'; this.querySelector('input').value='';">
+    <input type="email" placeholder="your@email.com" required>
+    <button type="submit">Reserve</button>
+  </form>
+  <div class="join-note">NO PAYMENT NOW · FITTING CONFIRMED BY EMAIL</div>
+</section>
+
+<footer>
+  <div>MERIDIAN WATCH CO. — EST. 2019</div>
+  <div>GENEVA, CH</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ---------- HERO WATCH ---------- */
+(function(){
+  const canvas = document.getElementById('hero-canvas');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, canvas.clientWidth/canvas.clientHeight, 0.1, 100);
+  camera.position.set(0, 0.4, 9);
+
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  function resize(){
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w/h;
+    camera.updateProjectionMatrix();
+  }
+
+  const brass = 0xC9A227;
+  const cream = 0xE8E2D4;
+
+  const watch = new THREE.Group();
+  scene.add(watch);
+
+  // Case (outer ring)
+  const caseGeo = new THREE.TorusGeometry(2.1, 0.32, 32, 100);
+  const caseMat = new THREE.MeshStandardMaterial({color:0x3a3d42, metalness:0.9, roughness:0.28});
+  const caseMesh = new THREE.Mesh(caseGeo, caseMat);
+  watch.add(caseMesh);
+
+  // Bezel accent ring
+  const bezelGeo = new THREE.TorusGeometry(1.85, 0.045, 16, 100);
+  const bezelMat = new THREE.MeshStandardMaterial({color:brass, metalness:1, roughness:0.25});
+  watch.add(new THREE.Mesh(bezelGeo, bezelMat));
+
+  // Dial (front face)
+  const dialGeo = new THREE.CircleGeometry(1.78, 64);
+  const dialMat = new THREE.MeshStandardMaterial({color:0x101214, metalness:0.3, roughness:0.6, side:THREE.DoubleSide});
+  const dial = new THREE.Mesh(dialGeo, dialMat);
+  dial.position.z = 0.34;
+  watch.add(dial);
+
+  // Hour markers
+  for(let i=0;i<12;i++){
+    const a = (i/12) * Math.PI*2;
+    const markerGeo = new THREE.BoxGeometry(0.045, i%3===0? 0.22:0.13, 0.02);
+    const markerMat = new THREE.MeshStandardMaterial({color:cream, metalness:0.4, roughness:0.5});
+    const m = new THREE.Mesh(markerGeo, markerMat);
+    m.position.set(Math.sin(a)*1.55, Math.cos(a)*1.55, 0.36);
+    m.rotation.z = -a;
+    watch.add(m);
+  }
+
+  // Subdial
+  const subGeo = new THREE.CircleGeometry(0.42, 48);
+  const subMat = new THREE.MeshStandardMaterial({color:0x181b1e, metalness:0.2, roughness:0.7});
+  const sub = new THREE.Mesh(subGeo, subMat);
+  sub.position.set(0, -0.65, 0.365);
+  watch.add(sub);
+  const subRingGeo = new THREE.TorusGeometry(0.42, 0.012, 8, 48);
+  const subRing = new THREE.Mesh(subRingGeo, new THREE.MeshStandardMaterial({color:brass, metalness:1, roughness:0.3}));
+  subRing.position.copy(sub.position);
+  watch.add(subRing);
+
+  // Hands
+  const handGroup = new THREE.Group();
+  handGroup.position.z = 0.37;
+  watch.add(handGroup);
+
+  const hourHand = new THREE.Mesh(
+    new THREE.BoxGeometry(0.06, 0.9, 0.015),
+    new THREE.MeshStandardMaterial({color:cream, metalness:0.5, roughness:0.4})
+  );
+  hourHand.position.y = 0.42;
+  const hourPivot = new THREE.Group();
+  hourPivot.add(hourHand);
+  hourHand.position.y = 0.42;
+  handGroup.add(hourPivot);
+
+  const minHand = new THREE.Mesh(
+    new THREE.BoxGeometry(0.045, 1.35, 0.015),
+    new THREE.MeshStandardMaterial({color:cream, metalness:0.5, roughness:0.4})
+  );
+  const minPivot = new THREE.Group();
+  minHand.position.y = 0.62;
+  minPivot.add(minHand);
+  handGroup.add(minPivot);
+
+  const secHand = new THREE.Mesh(
+    new THREE.BoxGeometry(0.02, 1.5, 0.01),
+    new THREE.MeshStandardMaterial({color:brass, metalness:0.8, roughness:0.2})
+  );
+  const secPivot = new THREE.Group();
+  secHand.position.y = 0.55;
+  secPivot.add(secHand);
+  handGroup.add(secPivot);
+
+  // Crown
+  const crownGeo = new THREE.CylinderGeometry(0.16, 0.16, 0.28, 24);
+  const crown = new THREE.Mesh(crownGeo, new THREE.MeshStandardMaterial({color:brass, metalness:1, roughness:0.3}));
+  crown.rotation.z = Math.PI/2;
+  crown.position.set(2.3, 0, 0.05);
+  watch.add(crown);
+
+  // Lights
+  scene.add(new THREE.AmbientLight(0x404040, 1.2));
+  const key = new THREE.DirectionalLight(0xffffff, 1.4);
+  key.position.set(4, 5, 6);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(brass, 0.8);
+  rim.position.set(-5, -2, -4);
+  scene.add(rim);
+
+  watch.rotation.y = -0.35;
+  watch.rotation.x = 0.08;
+
+  // interaction
+  let dragging = false, lastX = 0, lastY = 0;
+  let targetRotY = watch.rotation.y, targetRotX = watch.rotation.x;
+  let velY = 0.0018;
+
+  canvas.addEventListener('pointerdown', e=>{dragging=true; lastX=e.clientX; lastY=e.clientY;});
+  window.addEventListener('pointerup', ()=>dragging=false);
+  window.addEventListener('pointermove', e=>{
+    if(!dragging) return;
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    targetRotY += dx * 0.005;
+    targetRotX += dy * 0.003;
+    targetRotX = Math.max(-0.6, Math.min(0.6, targetRotX));
+    lastX = e.clientX; lastY = e.clientY;
+    velY = dx * 0.0004;
+  });
+
+  const clock = new THREE.Clock();
+  function animate(){
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    if(!dragging){ targetRotY += velY; velY *= 0.985; if(Math.abs(velY) < 0.0015) velY = 0.0015; }
+
+    watch.rotation.y += (targetRotY - watch.rotation.y) * 0.08;
+    watch.rotation.x += (targetRotX - watch.rotation.x) * 0.08;
+
+    hourPivot.rotation.z = -t * 0.04;
+    minPivot.rotation.z = -t * 0.5;
+    secPivot.rotation.z = -t * 1.2;
+
+    watch.position.y = Math.sin(t*0.6)*0.06;
+
+    renderer.render(scene, camera);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  animate();
+})();
+
+/* ---------- GEAR / MOVEMENT VISUAL ---------- */
+(function(){
+  const canvas = document.getElementById('gear-canvas');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+  camera.position.set(0, 1.2, 6.5);
+  camera.lookAt(0,0,0);
+
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  function resize(){
+    const size = canvas.parentElement.clientWidth;
+    renderer.setSize(size, size, false);
+    camera.aspect = 1;
+    camera.updateProjectionMatrix();
+  }
+
+  const brass = 0xC9A227;
+  const steel = 0x4a4e54;
+
+  function makeGear(radius, teeth, depth, color){
+    const shape = new THREE.Shape();
+    const toothH = radius * 0.16;
+    const inner = radius - toothH;
+    const seg = teeth * 2;
+    for(let i=0;i<=seg;i++){
+      const a = (i/seg) * Math.PI * 2;
+      const r = i % 2 === 0 ? radius : inner;
+      const x = Math.cos(a)*r, y = Math.sin(a)*r;
+      if(i===0) shape.moveTo(x,y); else shape.lineTo(x,y);
+    }
+    const holePath = new THREE.Path();
+    holePath.absarc(0,0, radius*0.25, 0, Math.PI*2, true);
+    shape.holes.push(holePath);
+
+    const geo = new THREE.ExtrudeGeometry(shape, {depth, bevelEnabled:true, bevelThickness:0.02, bevelSize:0.02, bevelSegments:2, curveSegments:2});
+    const mat = new THREE.MeshStandardMaterial({color, metalness:0.85, roughness:0.32});
+    return new THREE.Mesh(geo, mat);
+  }
+
+  const group = new THREE.Group();
+  scene.add(group);
+
+  const g1 = makeGear(1.5, 14, 0.28, brass);
+  g1.position.set(-1.1, 0.2, 0);
+  group.add(g1);
+
+  const g2 = makeGear(0.95, 10, 0.28, steel);
+  g2.position.set(1.05, 0.75, 0.35);
+  group.add(g2);
+
+  const g3 = makeGear(0.62, 8, 0.28, brass);
+  g3.position.set(1.55, -0.65, 0.6);
+  group.add(g3);
+
+  scene.add(new THREE.AmbientLight(0x505050, 1.1));
+  const key = new THREE.DirectionalLight(0xffffff, 1.3);
+  key.position.set(3,4,5);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(brass, 0.6);
+  rim.position.set(-4,-2,-3);
+  scene.add(rim);
+
+  group.rotation.x = -0.35;
+
+  let visible = false;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) visible = true; });
+  }, {threshold:0.15});
+  io.observe(canvas);
+
+  const clock = new THREE.Clock();
+  function animate(){
+    requestAnimationFrame(animate);
+    if(visible){
+      const t = clock.getElapsedTime();
+      g1.rotation.z = t * 0.6;
+      g2.rotation.z = -t * 0.6 * (14/10);
+      g3.rotation.z = t * 0.6 * (10/8) * -1 * -1;
+      group.rotation.y = Math.sin(t*0.25) * 0.25;
+      renderer.render(scene, camera);
+    }
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  animate();
+})();
+</script>
+</body>
+</html>
