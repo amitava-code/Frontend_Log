@@ -11,46 +11,38 @@ body{
 }
 
 
-.box{
-    height: 400px;
-    width: 400px;
-    background-color: tan;
+.marquee-wraper{
+    height: 40vh;
+    width: 100%;
+    display: flex;
     overflow: hidden;
-    animation: animate 5s linear infinite;
 }
 
 
+.marquee-track{
+    height: 100%;
+    width: 100%;
+    background-color: red;
+    flex-shrink: 0;
+    animation: marquee-animation 5.3s linear infinite;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3rem;
+
+}
+
+.marquee-track img{
+    height: 90%;
+    object-fit: cover;
+}
 
 
-
-
-
-
-
-
-
-@keyframes animate{
-    0%{
-        scale:1.2;
-        background-color: rgb(178, 146, 208);
+@keyframes marquee-animation{
+    from{
+        transform: translateX(0%);
     }
-    20%{
-
-        scale:1.6;
-        background-color: rgb(161, 109, 210);
-
-    }
-    50%{
-        scae:1.9;
-        background-color: rgb(138, 47, 222);
-    }
-    70%{
-        scale:2.2;
-        background-color: rgb(141, 30, 244);
-
-    }
-    100%{
-        scale: 2.8;
-        background-color: rgb(56, 10, 100);
+    to{
+        transform: translateX(-100%);
     }
 }
