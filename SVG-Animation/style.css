@@ -19,3 +19,15 @@ body{
         stroke-dashoffset: 0;
     }
 }
+
+.ball{
+    offset-path: path("M10,120 C120,-20 280,320 290,30");
+    offset-distance: 0%;
+    animation: ball-animation 1.9s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+@keyframes ball-animation{
+    to{
+        offset-distance: 100%;
+    }
+}
