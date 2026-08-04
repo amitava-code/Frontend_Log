@@ -1,0 +1,26 @@
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+    background-color: rgb(28, 27, 27);
+}
+
+
+  .goo-wrap { 
+    filter: url(#goo);
+    width: 200px; 
+    height: 100px; 
+    position: relative; }
+
+    
+.goo-text{
+    font-size: 4rem;
+    color: white;
+}

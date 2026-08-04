@@ -13,7 +13,13 @@ html,body{
 }
 
 
-  .goo-wrap { filter: url(#goo); width: 200px; height: 100px; position: relative; }
+  .goo-wrap { 
+    filter: url(#goo);
+    width: 200px; 
+    height: 100px; 
+    position: relative; }
+
+    
   .blob {
     position: absolute;
     width: 120px; height: 120px;
