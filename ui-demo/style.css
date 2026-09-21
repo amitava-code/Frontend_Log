@@ -1,0 +1,19 @@
+:root{
+    --cream :#F4F0E6;
+    --black: #111111;
+    --yellow: #FFD400;
+    --orange: #FF5A1F
+
+
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--cream);
+  background-image:
+    linear-gradient(var(--black) 1px, transparent 1px),
+    linear-gradient(90deg, var(--black) 1px, transparent 1px);
+  background-size: 40px 40px;
+  font-family: 'Space Mono', monospace;
+  padding: 48px 24px;
+}
