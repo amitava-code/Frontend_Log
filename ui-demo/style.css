@@ -38,3 +38,11 @@ body {
 .brutal-card {
   box-shadow: 8px 8px 0 var(--black); /* no blur — this is the key line */
 }
+
+.brutal-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.brutal-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 14px 14px 0 var(--black);
+}
